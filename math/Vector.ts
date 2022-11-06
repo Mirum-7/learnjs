@@ -3,10 +3,12 @@ export {coords, Vector2, START_COORDS_2}
 type coords<T extends 2 | 3> = T extends 2 ? {
 	x: number,
 	y: number,
+	[index: string]: any
 } : {
 	x: number,
 	y: number,
 	z: number,
+	[index: string]: any
 }
 
 const START_COORDS_2: coords<2> = {
