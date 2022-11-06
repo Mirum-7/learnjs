@@ -8,7 +8,6 @@ interface coords2{
 
 interface coords3 extends coords2{
 	z: number,
-	[index: string]: any
 }
 
 const START_COORDS = {
