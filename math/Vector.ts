@@ -6,9 +6,7 @@ interface coords2{
 	[index: string]: any
 }
 
-interface coords3{
-	x: number,
-	y: number,
+interface coords3 extends coords2{
 	z: number,
 	[index: string]: any
 }
@@ -96,7 +94,7 @@ class Vector2{
 	valueOf(): number{
 		return this.length;
 	}
-	toJSON(): object{
+	private toJSON(): object{
 		return {'x': this.x, 'y':this.y}
 	}
 
