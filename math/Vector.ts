@@ -22,14 +22,14 @@ class Vector2{
 		this.y = y;
 	}
 
-	add(other: Vector2 | coords<2>): coords<2>{
+	add(other: coords<2>): Vector2{
 		const newPosition = {
 			x: this.x + other.x,
 			y: this.y + other.y,
 		}
 		return new Vector2(newPosition)
 	}
-	subtract(other: coords<2>): coords<2>{
+	subtract(other: coords<2>): Vector2{
 		const newPosition = {
 			x: this.x - other.x,
 			y: this.y - other.y,
@@ -37,8 +37,8 @@ class Vector2{
 		return new Vector2(newPosition)
 	}
 	multiply(other: coords<2>): number
-	multiply(factor: number): coords<2>
-	multiply(factor: number | coords<2>): number | coords<2>{
+	multiply(factor: number): Vector2
+	multiply(factor: number | coords<2>): number | Vector2{
 		if (typeof factor === 'number') {
 			const newPosition = {
 				x: this.x * factor,
@@ -65,7 +65,7 @@ class Vector2{
 		return this.distance(START_COORDS_2)
 	}
 
-	get normalized(): coords<2>{
+	get normalized(): Vector2{
 		const newPosition = {
 			x: this.x / this.length,
 			y: this.y / this.length,
@@ -73,7 +73,7 @@ class Vector2{
 		return new Vector2(newPosition)
 	}
 
-	get vertical(): coords<2>{
+	get vertical(): Vector2{
 		const newPosition = {
 			x: this.y,
 			y: -this.x,
@@ -95,7 +95,7 @@ class Vector2{
 		return {'x': this.x, 'y':this.y}
 	}
 
-	static from(target: coords<2> | string): coords<2>{
+	static from(target: coords<2> | string): Vector2{
 		if (typeof target === 'string') {
 			const object = JSON.parse(target);
 			return new Vector2({
