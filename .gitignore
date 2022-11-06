@@ -1,0 +1,5 @@
+# Project exclude paths
+/math/Vector.js
+/math/Vector.js.map
+/main.js
+/main.js.map
