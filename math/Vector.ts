@@ -1,4 +1,4 @@
-export {coords, Vector2, START_COORDS_2}
+export {coords, Vector2, START_COORDS}
 
 type coords<T extends 2 | 3> = T extends 2 ? {
 	x: number,
@@ -11,15 +11,16 @@ type coords<T extends 2 | 3> = T extends 2 ? {
 	[index: string]: any
 }
 
-const START_COORDS_2: coords<2> = {
+const START_COORDS = {
 	x: 0,
 	y: 0,
+	z: 0,
 }
 
 class Vector2{
 	public x: number;
 	public y: number;
-	constructor({x, y}: coords<2> = START_COORDS_2) {
+	constructor({x, y}: coords<2> = START_COORDS) {
 		this.x = x;
 		this.y = y;
 	}
@@ -61,10 +62,10 @@ class Vector2{
 	}
 
 	get length2(): number{
-		return this.distance2(START_COORDS_2)
+		return this.distance2(START_COORDS)
 	}
 	get length(): number{
-		return this.distance(START_COORDS_2)
+		return this.distance(START_COORDS)
 	}
 
 	get normalized(): Vector2{
