@@ -45,9 +45,8 @@ class Vector2{
 				y: this.y * factor,
 			}
 			return new Vector2(newPosition);
-		} else {
-			return this.x * factor.x + this.y * factor.y;
 		}
+		return this.x * factor.x + this.y * factor.y;
 	}
 
 	distance2(other: coords<2>): number{
@@ -97,17 +96,16 @@ class Vector2{
 	}
 
 	static from(target: coords<2> | string): coords<2>{
-		if(typeof target === 'string'){
+		if (typeof target === 'string') {
 			const object = JSON.parse(target);
 			return new Vector2({
 				x: object.x,
 				y: object.y,
 			})
-		} else {
-			return new Vector2({
-				x: target.x,
-				y: target.y,
-			})
 		}
+		return new Vector2({
+			x: target.x,
+			y: target.y,
+		})
 	}
 }
