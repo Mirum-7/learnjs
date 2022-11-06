@@ -1,6 +1,6 @@
-export {position, Vector2, START_COORDS_2}
+export {coords, Vector2, START_COORDS_2}
 
-type position<T extends 2 | 3> = T extends 2 ? {
+type coords<T extends 2 | 3> = T extends 2 ? {
 	x: number,
 	y: number,
 } : {
@@ -9,65 +9,53 @@ type position<T extends 2 | 3> = T extends 2 ? {
 	z: number,
 }
 
-const START_COORDS_2: position<2> = {
+const START_COORDS_2: coords<2> = {
 	x: 0,
 	y: 0,
 }
 
 class Vector2{
-	public coords: position<2>;
-	constructor({x, y}: position<2> = START_COORDS_2) {
-		this.coords = {x,y};
+	public x: number;
+	public y: number;
+	constructor({x, y}: coords<2> = START_COORDS_2) {
+		this.x = x;
+		this.y = y;
 	}
 
-	get x(): number{
-		return this.coords.x;
-	}
-	set x(value: number) {
-		this.coords.x = value;
-	}
-
-	get y(): number{
-		return this.coords.y;
-	}
-	set y(value: number) {
-		this.coords.y = value;
-	}
-
-	add(other: Vector2 | position<2>): Vector2{
+	add(other: Vector2 | coords<2>): coords<2>{
 		const newPosition = {
 			x: this.x + other.x,
 			y: this.y + other.y,
 		}
 		return new Vector2(newPosition)
 	}
-	subtract(other: Vector2 | position<2>): Vector2{
+	subtract(other: coords<2>): coords<2>{
 		const newPosition = {
 			x: this.x - other.x,
 			y: this.y - other.y,
 		}
 		return new Vector2(newPosition)
 	}
-	multiply(other: Vector2): number
-	multiply(factor: number): Vector2
-	multiply(factor: number | Vector2): number | Vector2{
-		if (factor instanceof Vector2){
-			return this.x * factor.x + this.y * factor.y;
-		} else{
+	multiply(other: coords<2>): number
+	multiply(factor: number): coords<2>
+	multiply(factor: number | coords<2>): number | coords<2>{
+		if (typeof factor === 'number') {
 			const newPosition = {
 				x: this.x * factor,
 				y: this.y * factor,
 			}
 			return new Vector2(newPosition);
+		} else {
+			return this.x * factor.x + this.y * factor.y;
 		}
 	}
 
-	distance2(other: Vector2 | position<2>): number{
+	distance2(other: coords<2>): number{
 		const dx = this.x - other.x;
 		const dy = this.y - other.y;
 		return dx * dx + dy * dy;
 	}
-	distance(other: Vector2 | position<2>): number{
+	distance(other: coords<2>): number{
 		return Math.sqrt(this.distance2(other));
 	}
 
@@ -78,7 +66,7 @@ class Vector2{
 		return this.distance(START_COORDS_2)
 	}
 
-	get normalized(): Vector2{
+	get normalized(): coords<2>{
 		const newPosition = {
 			x: this.x / this.length,
 			y: this.y / this.length,
@@ -86,7 +74,7 @@ class Vector2{
 		return new Vector2(newPosition)
 	}
 
-	get vertical(): Vector2{
+	get vertical(): coords<2>{
 		const newPosition = {
 			x: this.y,
 			y: -this.x,
@@ -108,13 +96,7 @@ class Vector2{
 		return {'x': this.x, 'y':this.y}
 	}
 
-	static getPosition(target: Vector2 | position<2>): position<2>{
-		return {
-			x: target.x,
-			y: target.y,
-		};
-	}
-	static from(target: Vector2 | position<2> | string): Vector2{
+	static from(target: coords<2> | string): coords<2>{
 		if(typeof target === 'string'){
 			const object = JSON.parse(target);
 			return new Vector2({
