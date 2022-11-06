@@ -1,10 +1,12 @@
-export {coords, Vector2, START_COORDS}
+export {coords2, coords3, Vector2, START_COORDS}
 
-type coords<T extends 2 | 3> = T extends 2 ? {
+interface coords2{
 	x: number,
 	y: number,
 	[index: string]: any
-} : {
+}
+
+interface coords3{
 	x: number,
 	y: number,
 	z: number,
@@ -20,28 +22,28 @@ const START_COORDS = {
 class Vector2{
 	public x: number;
 	public y: number;
-	constructor({x, y}: coords<2> = START_COORDS) {
+	constructor({x, y}: coords2 = START_COORDS) {
 		this.x = x;
 		this.y = y;
 	}
 
-	add(other: coords<2>): Vector2{
+	add(other: coords2): Vector2{
 		const newPosition = {
 			x: this.x + other.x,
 			y: this.y + other.y,
 		}
 		return new Vector2(newPosition)
 	}
-	subtract(other: coords<2>): Vector2{
+	subtract(other: coords2): Vector2{
 		const newPosition = {
 			x: this.x - other.x,
 			y: this.y - other.y,
 		}
 		return new Vector2(newPosition)
 	}
-	multiply(other: coords<2>): number
+	multiply(other: coords2): number
 	multiply(factor: number): Vector2
-	multiply(factor: number | coords<2>): number | Vector2{
+	multiply(factor: number | coords2): number | Vector2{
 		if (typeof factor === 'number') {
 			const newPosition = {
 				x: this.x * factor,
@@ -52,12 +54,12 @@ class Vector2{
 		return this.x * factor.x + this.y * factor.y;
 	}
 
-	distance2(other: coords<2>): number{
+	distance2(other: coords2): number{
 		const dx = this.x - other.x;
 		const dy = this.y - other.y;
 		return dx * dx + dy * dy;
 	}
-	distance(other: coords<2>): number{
+	distance(other: coords2): number{
 		return Math.sqrt(this.distance2(other));
 	}
 
@@ -98,7 +100,7 @@ class Vector2{
 		return {'x': this.x, 'y':this.y}
 	}
 
-	static from(target: coords<2> | string): Vector2{
+	static from(target: coords2 | string): Vector2{
 		if (typeof target === 'string') {
 			const object = JSON.parse(target);
 			return new Vector2({
