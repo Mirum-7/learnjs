@@ -1,6 +1,6 @@
-import {Vector2} from "./math/Vector";
+import {Vector2, Vector3} from "./math/Vector";
 
-const a = new Vector2({x: 2, y: 2});
-const b = a.JSON
+const a = new Vector3({x: 0, y: 1, z: 0});
+const b = new Vector3({x: 1, y: 0, z: 0});
 
-console.log(b);
+console.log(b.cross(a));
